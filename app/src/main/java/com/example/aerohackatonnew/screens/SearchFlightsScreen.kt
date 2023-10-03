@@ -40,20 +40,20 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 
-data class Flight(val id: Int, val flightName: String, val airplaneName : String)
+data class Flight(val id: Int, val airplaneNumber : String, val airplaneName : String, val flightName: String)
 
 object FlightList {
     val flights = listOf(
-        Flight(1, "S4242", "Airbus A320"),
-        Flight(2, "A1234", "Airbus B-737"),
-        Flight(3, "flight3", "Boeing 737-800"),
-        Flight(4, "B4321", "Boeing 777"),
-        Flight(5, "flight5", "ну самолет"),
-        Flight(6, "polet6", "летит"),
-        Flight(7, "poletel", "улетит"),
-        Flight(8, "flight8", "полетит"),
-        Flight(9, "flight9", "вылетит"),
-        Flight(10, "flight10", "подлетит"),
+        Flight(1, "AFL290","S4242", "Airbus A320"),
+        Flight(2, "AFL297", "A1234", "Airbus B-737"),
+        Flight(3, "RA2324","flight3", "Boeing 737-800"),
+        Flight(4, "FS534","B4321", "Boeing 777"),
+        Flight(5, "SH1234","flight5", "ну самолет"),
+        Flight(6, "SSD34","polet6", "летит"),
+        Flight(7, "GF212","poletel", "улетит"),
+        Flight(8, "BV134","flight8", "полетит"),
+        Flight(9, "RA123","flight9", "вылетит"),
+        Flight(10, "AFL280","flight10", "подлетит"),
     )
 }
 

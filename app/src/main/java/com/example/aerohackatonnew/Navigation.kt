@@ -19,11 +19,6 @@ fun Navigation(navController: NavHostController){
         composable("search") {
             SearchFlightsScreen(navController)
         }
-//        composable("flight/{flightName}", arguments = listOf(navArgument("flightName") { type = NavType.StringType })
-//        ) { backStackEntry ->
-//            val flightName = backStackEntry.arguments?.getString("flightName")
-//            FlightScreen(flightName.toString())
-//        }
         composable("flight/{flightName}", arguments = listOf(navArgument("flightName") { type = NavType.StringType })
         ) { backStackEntry ->
             val flightName = backStackEntry.arguments?.getString("flightName")
