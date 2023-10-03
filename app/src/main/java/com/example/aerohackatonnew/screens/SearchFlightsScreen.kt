@@ -40,20 +40,20 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 
-data class Flight(val id: Int, val name: String)
+data class Flight(val id: Int, val flightName: String, val airplaneName : String)
 
 object FlightList {
     val flights = listOf(
-        Flight(1, "S4242"),
-        Flight(2, "A1234"),
-        Flight(3, "flight3"),
-        Flight(4, "B4321"),
-        Flight(5, "flight5"),
-        Flight(6, "polet6"),
-        Flight(7, "poletel"),
-        Flight(8, "flight8"),
-        Flight(9, "flight9"),
-        Flight(10, "flight10"),
+        Flight(1, "S4242", "Airbus A320"),
+        Flight(2, "A1234", "Airbus B-737"),
+        Flight(3, "flight3", "Boeing 737-800"),
+        Flight(4, "B4321", "Boeing 777"),
+        Flight(5, "flight5", "ну самолет"),
+        Flight(6, "polet6", "летит"),
+        Flight(7, "poletel", "улетит"),
+        Flight(8, "flight8", "полетит"),
+        Flight(9, "flight9", "вылетит"),
+        Flight(10, "flight10", "подлетит"),
     )
 }
 
@@ -63,7 +63,7 @@ fun SearchFlightsScreen(navHostController: NavHostController) {
     var query by remember { mutableStateOf("") }
 
     val filteredAircraftList = FlightList.flights.filter {
-        it.name.contains(query, ignoreCase = true)
+        it.flightName.contains(query, ignoreCase = true)
     }
 
     Column (
@@ -141,7 +141,7 @@ fun FlightCard(flight: Flight, navController : NavHostController) {
                 enabled = true
             ) {
                 //логика клика - переход на схему
-                navController.navigate("flight/${flight.name}")
+                navController.navigate("flight/${flight.flightName}")
             },
         elevation = CardDefaults.cardElevation(4.dp),
         shape = MaterialTheme.shapes.medium
@@ -151,7 +151,7 @@ fun FlightCard(flight: Flight, navController : NavHostController) {
                 .padding(12.dp)
         ) {
             Text(
-                text = flight.name,
+                text = flight.flightName,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
