@@ -7,9 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.aerohackatonnew.screens.FlightList
-import com.example.aerohackatonnew.screens.FlightScreen
+import com.example.aerohackatonnew.screens.ConcreteFlightScreen
 import com.example.aerohackatonnew.screens.SearchFlightsScreen
 
+//просто навигация с контроллером, с главного окна поиска переход на схему борта конкретного самолета
 @Composable
 fun Navigation(navController: NavHostController){
     NavHost(
@@ -19,16 +20,11 @@ fun Navigation(navController: NavHostController){
         composable("search") {
             SearchFlightsScreen(navController)
         }
-        composable("flight/{flightName}", arguments = listOf(navArgument("flightName") { type = NavType.StringType })
+        composable("flight/{airplaneNumber}", arguments = listOf(navArgument("airplaneNumber") { type = NavType.StringType })
         ) { backStackEntry ->
-            val flightName = backStackEntry.arguments?.getString("flightName")
-            val selectedFlight = FlightList.flights.find { it.flightName == flightName }
-            if (selectedFlight != null) FlightScreen(selectedFlight)
+            val airplaneNumber = backStackEntry.arguments?.getString("airplaneNumber")
+            val selectedAirplane = FlightList.flights.find { it.airplaneNumber == airplaneNumber }
+            if (selectedAirplane != null) ConcreteFlightScreen(selectedAirplane)
         }
     }
-}
-
-sealed class NavigationItem(var route: String, var title: String) {
-    object Search : NavigationItem("search","Search")
-    object Flight : NavigationItem("flight", "Flight")
 }

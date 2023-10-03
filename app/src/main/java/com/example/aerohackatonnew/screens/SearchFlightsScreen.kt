@@ -57,6 +57,7 @@ object FlightList {
     )
 }
 
+//компоуз функция экрана поиска
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchFlightsScreen(navHostController: NavHostController) {
@@ -79,6 +80,7 @@ fun SearchFlightsScreen(navHostController: NavHostController) {
             shape = MaterialTheme.shapes.medium
         )
         {
+            // всякое для поиска
             Row (
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -121,6 +123,7 @@ fun SearchFlightsScreen(navHostController: NavHostController) {
             }
         }
 
+            //для списка
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
         ) {
@@ -132,6 +135,7 @@ fun SearchFlightsScreen(navHostController: NavHostController) {
     }
 }
 
+//функция создания карточки по номеру борта
 @Composable
 fun FlightCard(flight: Flight, navController : NavHostController) {
     Card(
@@ -140,8 +144,8 @@ fun FlightCard(flight: Flight, navController : NavHostController) {
             .clickable(
                 enabled = true
             ) {
-                //логика клика - переход на схему
-                navController.navigate("flight/${flight.flightName}")
+                //переход на схему по номеру борта
+                navController.navigate("flight/${flight.airplaneNumber}")
             },
         elevation = CardDefaults.cardElevation(4.dp),
         shape = MaterialTheme.shapes.medium
@@ -151,7 +155,7 @@ fun FlightCard(flight: Flight, navController : NavHostController) {
                 .padding(12.dp)
         ) {
             Text(
-                text = flight.flightName,
+                text = flight.airplaneNumber,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
