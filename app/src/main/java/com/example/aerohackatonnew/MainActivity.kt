@@ -41,6 +41,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.aerohackatonnew.ui.theme.AerohackatonNEWTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,129 +50,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AerohackatonNEWTheme {
-                SearchFlights()
+                val navHostController = rememberNavController()
+                Navigation(navController = navHostController)
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchFlights() {
-    var query by remember { mutableStateOf("") }
-
-    val filteredAircraftList = FlightList.flights.filter {
-        it.name.contains(query, ignoreCase = true)
-    }
-
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ){
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            elevation = CardDefaults.cardElevation(12.dp),
-            shape = MaterialTheme.shapes.medium
-        )
-        {
-            Row (
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(32.dp)
-                        .padding(2.dp),
-                    tint = Color.Blue
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                TextField(
-                    value = query,
-                    onValueChange = {
-                        query = it
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Search
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onSearch = {
-                        }
-                    ),
-                    textStyle = TextStyle(
-                        fontSize = 20.sp,
-                        color = Color.Black
-                    ),
-                    placeholder = {
-                        Text(
-                            text = "Поиск по номеру рейса",
-                            style = TextStyle(
-                                fontSize = 18.sp
-                            )
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-        }
-
-        LazyColumn(
-            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp)
-        ) {
-            items(filteredAircraftList) { flight ->
-                FlightCard(flight)
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        }
-    }
-}
-
-@Composable
-fun FlightCard(flight: Flight) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable (
-                enabled = true
-            ) {
-                Log.d("clicked", "clicked!!")
-                //логика клика - переход на схему
-            },
-        elevation = CardDefaults.cardElevation(4.dp),
-        shape = MaterialTheme.shapes.medium
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(12.dp)
-        ) {
-            Text(
-                text = flight.name,
-                style = TextStyle(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp
-                ),
-                modifier = Modifier.padding(8.dp)
-            )
-        }
-    }
-}
-
-data class Flight(val id: Int, val name: String)
-object FlightList {
-    val flights = listOf(
-        Flight(1, "S4242"),
-        Flight(2, "A1234"),
-        Flight(3, "flight3"),
-        Flight(4, "B4321"),
-        Flight(5, "flight5"),
-        Flight(6, "polet6"),
-        Flight(7, "poletel"),
-        Flight(8, "flight8"),
-        Flight(9, "flight9"),
-        Flight(10, "flight10"),
-    )
 }
