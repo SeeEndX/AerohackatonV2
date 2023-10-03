@@ -94,6 +94,7 @@ fun ConcreteFlightScreen(flight: Flight?){
         Button(
             onClick = {
                 // функция создания отчета
+                changeCell()
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -104,9 +105,15 @@ fun ConcreteFlightScreen(flight: Flight?){
     }
 }
 
+var cellColor = Color.Gray
+
 //разметка сидений
 @Composable
 fun AircraftSeatLayout(econSeatsCount: Int, businSeatsCount: Int) {
+    //для символов, проще так было
+    val economClass = listOf("A", "B", "C", "1", "D", "E", "F")
+    val businessClass = listOf("A", "B", "1", "D", "E")
+
     LazyColumn(
         contentPadding = PaddingValues(6.dp),
         modifier = Modifier.fillMaxWidth()
@@ -143,7 +150,7 @@ fun AircraftSeatLayout(econSeatsCount: Int, businSeatsCount: Int) {
                     if (char.length == 1 && char[0].isLetter()) {
                         Box(
                             modifier = Modifier
-                                .background(Color.Gray)
+                                .background(cellColor)
                                 .padding(4.dp)
                                 .size(36.dp),
                             contentAlignment = Alignment.Center
@@ -186,7 +193,7 @@ fun AircraftSeatLayout(econSeatsCount: Int, businSeatsCount: Int) {
                     if (char.length == 1 && char[0].isLetter()) {
                         Box(
                             modifier = Modifier
-                                .background(Color.Gray)
+                                .background(cellColor)
                                 .padding(4.dp)
                                 .size(36.dp)
                                 .clickable{
@@ -215,6 +222,13 @@ fun AircraftSeatLayout(econSeatsCount: Int, businSeatsCount: Int) {
     }
 }
 
-//для символов, проще так было
-val economClass = listOf("A", "B", "C", "1", "D", "E", "F")
-val businessClass = listOf("A", "B", "1", "D", "E")
+fun changeCell(){
+    //тут пропишите логику смены цвета, щас по нажатию на генерацию отчета меняется
+    //обновление при выходе или пролистывании
+    //в реальном времени уже нет сил прописывать, надеюсь, справитесь, удачи)
+    cellColor = Color.Green
+}
+
+fun generateDocument(){
+    //генерация отчета
+}
